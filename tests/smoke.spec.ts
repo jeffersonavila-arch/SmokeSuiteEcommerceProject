@@ -3,13 +3,7 @@ import { LoginPage } from '../src/pages/login.page';
 import { ProductsPage } from '../src/pages/products.page';
 import { CartPage } from '../src/pages/cart.page';
 import { CheckoutPage } from '../src/pages/checkout.page';
-
-const defaultUser = {
-  username: 'standard_user',
-  password: 'secret_sauce'
-};
-
-const selectedProducts = ['Sauce Labs Backpack', 'Sauce Labs Bike Light'];
+import { credentials, selectedProducts } from './test-data';
 
 test.describe('E-Commerce Smoke Suite', () => {
   test('Successful login for a valid user', async ({ browser }) => {
@@ -18,7 +12,7 @@ test.describe('E-Commerce Smoke Suite', () => {
     const loginPage = new LoginPage(page);
 
     await loginPage.goto();
-    await loginPage.login(defaultUser.username, defaultUser.password);
+    await loginPage.login(credentials.username, credentials.password);
 
     await expect(page).toHaveURL(/inventory.html/);
     await expect(page.locator('.inventory_list')).toBeVisible();
